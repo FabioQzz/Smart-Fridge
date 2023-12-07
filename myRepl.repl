@@ -1,0 +1,9 @@
+TempSensor: Sensor.SPI_temperature @ spi1
+
+debug1: Miscellaneous.Printer @ sysbus <0x80000010, +0x10>
+
+MyButton: Miscellaneous.Button @ gpioPortA
+    -> gpioPortA@3
+
+
+    

@@ -1,0 +1,29 @@
+include  @\Users\39346\Desktop\SmartFridge\sf21\Printer.cs
+include@\Users\39346\Desktop\SmartFridge\sf21\Display.cs
+include @\Users\39346\Desktop\SmartFridge\sf21\SPI_temperature.cs
+
+using sysbus
+mach create "STM32F4_Discovery"
+machine LoadPlatformDescription @platforms/boards/stm32f4_discovery-kit.repl
+machine LoadPlatformDescription @\Users\39346\Desktop\SmartFridge\sf21\myRepl.repl
+
+
+sysbus LogPeripheralAccess gpioPortD
+sysbus LogPeripheralAccess gpioPortA
+sysbus LogPeripheralAccess spi1
+
+
+cpu PerformanceInMips 125
+$bin?="C:\Users\39346\Desktop\SmartFridge\sf21\.pio\build\black_f407vg\firmware.elf"
+
+macro reset
+"""
+  sysbus LoadELF @\Users\39346\Desktop\SmartFridge\sf21\.pio\build\black_f407vg\firmware.elf
+"""
+
+runMacro $reset
+
+machine StartGdbServer 3333 True
+
+start
+
